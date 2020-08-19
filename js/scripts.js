@@ -19,45 +19,50 @@ function isPalindrome(inputA) {
   return message;
 }
 
-function primeShift(input) {
-	const primeArrayStatic;
-	for (let i = 2; i < input; i++) {
-		primeArrayStatic.push(i);
-	}
+// function primeShift(input) {
+// 	const primeArrayStatic;
+// 	for (let i = 2; i < input; i++) {
+// 		primeArrayStatic.push(i);
+// 	}
 
-	let primeArray = [];
-	let prime = 2;
-	primeArrayStatic.forEach(function(num) {
-		if (num % prime !== 0 || num === prime) {
-			primeArray.push(num);
-		}
-		prime++;
-	})
-	return primeArray;
-}
+// 	let primeArray = [];
+// 	let prime = 2;
+// 	primeArrayStatic.forEach(function(num) {
+// 		if (num % prime !== 0 || num === prime) {
+// 			primeArray.push(num);
+// 		}
+// 		prime++;
+// 	})
+// 	return primeArray;
+// }
 
-function primeShift(input) {
-  let primeArray = [];
-  let prime = 1;
+// function primeShift(input) {
+//   const primeArray = [];
+// 	for (let i = 1; i <= input; i++) {
+// 		primeArray.push(i);
+//   }
+//   recLoop(primeArray, 2, input); 
+// }
 
-  for (let i = 2; i < input; i++) {
-    prime++;
-    for (let e = 2; e < input; e++) {
-      if (i % prime === 0 && i !== prime) {
-        primeArray.push(i);
+function recLoop(array, prime, input) {
+  if (array === 0) {
+    array = [];
+    for (let i = 1; i <= input; i++) {
+      array.push(i);
+    }
+    recLoop(array, prime, input);
+  } else if (prime <= input) {
+    let newArray = [];
+    array.forEach(function(num){
+      if (num % prime !== 0 || num === prime) {
+        newArray.push(num);
       }
-    }    
-  }
-}
-
-recLoop(array, prime, num) {
-  
-  for (let i = num; i > prime; i--) {
-
-    if ()
-  }
-  prime++;
-  recLoop(array, prime, num);
+    });
+    prime++;
+    recLoop(newArray, prime, input);
+  } else {
+    $("#result3").text(array);
+  } 
 }
 
 
@@ -77,7 +82,6 @@ $(document).ready(function() {
   });
   $("#userInput2").submit(function(event) {
     const input2 = $("input#input2").val();
-    //alert(input2);
     const result2 = isPalindrome(input2);
 
     $("#result2").text(result2);
@@ -85,7 +89,7 @@ $(document).ready(function() {
   });
   $("#userInput3").submit(function(event) {
     const input3 = $("input#input3").val();
-    const result3 = primeShift(input3);
+    const result3 = recLoop(0, 2, input3);
 
     $("#result3").text(result3);
     event.preventDefault();
