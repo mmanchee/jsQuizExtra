@@ -45,7 +45,9 @@ function isPalindrome(inputA) {
 // }
 
 function recLoop(array, prime, input) {
-  if (array === 0) {
+  if (isNaN(input) || input < 0) {
+    alert("Please enter a positive number and try again.");
+  } else if (array === 0) {
     array = [];
     for (let i = 1; i <= input; i++) {
       array.push(i);
